@@ -1,11 +1,14 @@
 import { use } from "react"
-
+import User from "./use"
 export default function Users({fetchUsers}){
-    const message = use(fetchUsers)
-    console.log(message)
+    const messages = use(fetchUsers)
+    console.log(messages)
     return (
         <div className="card">
-            <p>Users: </p>
+            <p>Users: {messages.length}</p>
+            {
+                messages.map(message=><User message={message}></User>)
+            }
         </div>
     )
 }
