@@ -1,9 +1,32 @@
 
+
+import { Suspense } from 'react'
 import './App.css'
 import Batsman from './batsman'
 import Bowler from './bolwer'
+import Users from './users'
+import Friends from './friends'
+import Posts from './posts'
+
+
+
+// const fetchUsers = fetch('https://jsonplaceholder.typicode.com/users')
+// .then(res=>res.json())
+
+// const fetchFriends  = async()=>{
+//   const res =await fetch('https://jsonplaceholder.typicode.com/users')
+//   return res.json()
+
+// }
+
+const postsFetch = async()=>{
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts')
+  return res.json()
+}
 
 function App() {
+  // const messageFriends = fetchFriends();
+  const messagePosts = postsFetch();
 
   function handleClick(){
     alert('click1')
@@ -23,6 +46,24 @@ function App() {
   return (
     <>
       <h3>Vite + React</h3>
+      {/* jeson placehoder posts apii */}
+      <Suspense fallback={<p>Posts are loading...</p>}>
+      <Posts messagePosts = {messagePosts}></Posts>
+      </Suspense>
+
+
+
+      {/* <Suspense fallback={<h1>Name loading...</h1>}>
+        <Users fetchUsers={fetchUsers}></Users>
+      </Suspense> */}
+      {/* <Suspense fallback={<p>friends are not loading...</p>}>
+        <Friends messageFriends={messageFriends}></Friends>
+      </Suspense>
+      */}
+
+
+
+
       <Bowler></Bowler>
       <Batsman></Batsman>
 
